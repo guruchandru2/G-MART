@@ -1,47 +1,29 @@
-const ratingFilter = document.getElementById("ratingFilter");
-const sortBy = document.getElementById("sortBy");
-const products = document.querySelector(".products");
-
-// Store original order
-const originalCards = Array.from(document.querySelectorAll(".card"));
-
-// Rating Filter
+const ratingFilter=document.getElementById("ratingFilter");
+const sortBy=document.getElementById("sortBy");
+const products=document.querySelector(".products");
+const originalCards=Array.from(document.querySelectorAll(".card"));
 ratingFilter.addEventListener("change", function () {
+const rating=parseInt(ratingFilter.value);
+const cards=document.querySelectorAll(".card");
+cards.forEach(function(card){
 
-    const rating = parseInt(ratingFilter.value);
-    const cards = document.querySelectorAll(".card");
-    
-
-    cards.forEach(function(card){
-
-        const productRating = parseInt(card.dataset.rating);
-
-        if(rating === 0 || productRating >= rating){
+    const productRating = parseInt(card.dataset.rating);
+    if(rating === 0 || productRating >= rating){
             card.style.display = "block";
-        }
+             }
         else{
             card.style.display = "none";
         }
-
     });
-
 });
-
-// Sort Products
 sortBy.addEventListener("change", function(){
-
-    let cards = Array.from(document.querySelectorAll(".card"));
-
+let cards = Array.from(document.querySelectorAll(".card"));
     if(sortBy.value === "low"){
-
         cards.sort(function(a,b){
             return parseInt(a.dataset.price) - parseInt(b.dataset.price);
         });
-
     }
-
     else if(sortBy.value === "high"){
-
         cards.sort(function(a,b){
             return parseInt(b.dataset.price) - parseInt(a.dataset.price);
         });
